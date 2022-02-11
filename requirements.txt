@@ -1,1 +1,9 @@
 opencv-python
+numpy
+pillow
+pymem
+time
+pynput
+keyboard
+pywin32
+
