@@ -7,7 +7,7 @@ from pynput.mouse import Controller as Controller
 from pynput.mouse import Button
 import keyboard
 import win32con,win32api
-
+import pyautogui
 
 #Game offsets
 ################################################
@@ -21,8 +21,8 @@ m_iGlowIndex = (0x10488)
 ################################################
 pm = pymem.Pymem('csgo.exe')
 client = pymem.process.module_from_name(pm.process_handle,'client.dll').lpBaseOfDll
-c_x = 140
-c_y = 216
+# c_x = 0
+# c_y = 0
 imgWidth = 420
 imgHeight = 648
 
@@ -104,14 +104,16 @@ while True:
 
     if enabled == True:
         if x!=0 and y!=0:
+
+            c_x, c_y = pyautogui.position()
             xDist = x - c_x
             yDist = y - c_y
 
-            print('x:', x,'y:',y)
-            print('cx:',c_x,'cy:',c_y)
-            print('xDist:',xDist,'yDist:',yDist)
-
-            print()
+            # print('x:', x,'y:',y)
+            # print('cx:',c_x,'cy:',c_y)
+            # print('xDist:',xDist,'yDist:',yDist)
+            # print()
+            
             win32api.mouse_event(win32con.MOUSEEVENTF_MOVE,xDist*2,yDist*2,0,0)
 
             time.sleep(0.06)
