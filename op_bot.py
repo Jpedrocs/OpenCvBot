@@ -21,8 +21,8 @@ m_iGlowIndex = (0x10488)
 ################################################
 pm = pymem.Pymem('csgo.exe')
 client = pymem.process.module_from_name(pm.process_handle,'client.dll').lpBaseOfDll
-# c_x = 0
-# c_y = 0
+c_x = 140
+c_y = 216
 imgWidth = 420
 imgHeight = 648
 
@@ -67,9 +67,9 @@ def getContours(imgMask,imgDraw):
         approx = cv2.approxPolyDP(biggerCont,0.02*biggerPeri,True)
         x,y,w,h = cv2.boundingRect(approx)
         cv2.rectangle(imgDraw,(x,y),(x+w,y+h),(255,0,0),2)
-        cv2.circle(imgDraw,(x+w//2-1,y+5),5,(0,150,150),cv2.FILLED)
+        cv2.circle(imgDraw,(x+w//2-1,y+10),5,(0,150,150),cv2.FILLED)
 
-    return x+w//2-1, y+5,w,h
+    return x+w//2-1, y+10,w,h
 
 lower = np.array([0,203,117]) #hue,sat,val(min)
 upper = np.array([125,255,255])#hue,sat,val(max)
@@ -105,14 +105,14 @@ while True:
     if enabled == True:
         if x!=0 and y!=0:
 
-            c_x, c_y = pyautogui.position()
+            # c_x, c_y = pyautogui.position()
             xDist = x - c_x
             yDist = y - c_y
 
-            # print('x:', x,'y:',y)
-            # print('cx:',c_x,'cy:',c_y)
-            # print('xDist:',xDist,'yDist:',yDist)
-            # print()
+            print('x:', x,'y:',y)
+            print('cx:',c_x,'cy:',c_y)
+            print('xDist:',xDist,'yDist:',yDist)
+            print()
             
             win32api.mouse_event(win32con.MOUSEEVENTF_MOVE,xDist*2,yDist*2,0,0)
 
