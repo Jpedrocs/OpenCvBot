@@ -7,22 +7,20 @@ from pynput.mouse import Controller as Controller
 from pynput.mouse import Button
 import keyboard
 import win32con,win32api
-import pyautogui
-
+from csgo import *
 #Game offsets
 ################################################
-dwForceJump = (0x52789F8)
-dwLocalPlayer = (0xDB35EC)
-m_fFlags = (0x104)
-dwEntityList = (0x4DCEB7C)
-m_iTeamNum = (0xF4)
-dwGlowObjectManager = (0x5316E98)
-m_iGlowIndex = (0x10488)
+
 ################################################
+
 pm = pymem.Pymem('csgo.exe')
 client = pymem.process.module_from_name(pm.process_handle,'client.dll').lpBaseOfDll
 c_x = 140
 c_y = 216
+
+c_x = 640
+c_y = 360
+
 imgWidth = 420
 imgHeight = 648
 
@@ -80,8 +78,9 @@ while True:
     execGlow()
 
     croppedImg = (500,144,780,576)
+    fullImg = (0,0,1280,720)
 
-    img = ImageGrab.grab(bbox=(500,144,780,576))
+    img = ImageGrab.grab(bbox=croppedImg)
     frame = np.array(img)
     img = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
 
